@@ -20,7 +20,7 @@ case "$1" in
 start)
 echo "Starting VNC Server"
 #Insert your favoured settings for a VNC session
-su $USER -c '/usr/bin/vncserver :1 -geometry 1440x900 -depth 24'
+su $USER -c '/usr/bin/vncserver :1'
 ;;
 
 stop)

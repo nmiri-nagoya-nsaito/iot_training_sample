@@ -40,7 +40,7 @@ spawn "/usr/bin/vncpasswd"
 expect "Password:"
 send "iot0x0x\r"
 expect "Verify:"
-send "$mypass\r"
+send "iot0x0x\r"
 expect "view-only password (y/n)?"
 send "n\r"
 expect eof

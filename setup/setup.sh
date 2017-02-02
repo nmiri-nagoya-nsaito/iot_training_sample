@@ -122,6 +122,9 @@ sudo npm install -g node-red-contrib-dht-sensor
 ### install node-red-contrib-ui
 sudo npm install -g node-red-contrib-ui
 
+### install node-red-m2x
+sudo npm install -g node-red-m2x
+
 ##### complete
 
 # when a setup complete successfully, a LED is turned on for 30 seconds.

@@ -4,7 +4,6 @@ set -e
 ##### functions
 
 function led_turnon () {
-    gpio -g mode 21 out
     gpio -g write 21 1
     sleep $1
     gpio -g write 21 0
@@ -18,10 +17,13 @@ function led_blynk () {
 ##### error handling
 
 # when an error occurs, blynk a led 100 times
-trap 'led_blynk 0.2' ERR
+trap 'gpio -g write 21 1' ERR
 
 ##### Start
 echo 'Setup start.'
+
+### LED port setting
+gpio -g mode 21 out
 
 ### update packages
 cd $HOME
@@ -127,8 +129,8 @@ sudo npm install -g node-red-m2x
 
 ##### complete
 
-# when a setup complete successfully, a LED is turned on for 30 seconds.
-led_turnon 30
+# when a setup complete successfully, LED is turned on.
+gpio -g write 21 1
 
 echo 'Setup completed.'
 exit 0

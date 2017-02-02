@@ -36,7 +36,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tightvncserver
 
 ### set vncserver password
 /usr/bin/expect <<EOF
-spawn "/usr/bin/vncpasswd"
+spawn "/usr/bin/vncserver"
 expect "Password:"
 send "iot0x0x\r"
 expect "Verify:"
@@ -70,7 +70,7 @@ HOME=/home/pi
 
 export USER HOME
 
-case "$1" in
+case "\$1" in
 start)
 echo "Starting VNC Server"
 #Insert your favoured settings for a VNC session

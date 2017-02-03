@@ -10,14 +10,14 @@ function led_turnon () {
 }
 
 function led_blynk () {
-    for i in {1..100};do $(led_turnon $1; sleep $1);done;
+    for i in {1..10};do $(led_turnon $1; sleep $1);done;
     echo setup failed.
 }
 
 ##### error handling
 
-# when an error occurs, blynk a led 100 times
-trap 'gpio -g write 21 1' ERR
+# when an error occurs, blynk a led 10 times
+trap 'led_blynk 1' ERR
 
 ##### Start
 echo 'Setup start.'

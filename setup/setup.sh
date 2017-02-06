@@ -54,7 +54,7 @@ cd $HOME
 
 ## create vncboot ##
 cat << EOS >> vncboot
-#! /bin/sh
+#!/bin/sh
 # /etc/init.d/vncboot
 
 ### BEGIN INIT INFO
@@ -68,20 +68,19 @@ cat << EOS >> vncboot
 ### END INIT INFO
 
 USER=pi
-HOME=/home/pi
 
-export USER HOME
+export USER
 
 case "\$1" in
 start)
 echo "Starting VNC Server"
 #Insert your favoured settings for a VNC session
-su $USER -c '/usr/bin/vncserver :1'
+su \$USER -c '/usr/bin/vncserver :1'
 ;;
 
 stop)
 echo "Stopping VNC Server"
-su $USER -c '/usr/bin/vncserver -kill :1'
+su \$USER -c '/usr/bin/vncserver -kill :1'
 ;;
 
 *)
@@ -101,14 +100,20 @@ sudo update-rc.d vncboot defaults
 
 ### update Node-RED package
 cd $HOME
-curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered -o update-nodejs-and-nodered
+if [ ! -f update-nodejs-and-nodered ]; then
+    curl -L https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered -o update-nodejs-and-nodered
+fi
 echo "y" | bash update-nodejs-and-nodered
 sudo systemctl enable nodered.service
 
 ### install BCM2835 library
 cd $HOME
-wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.51.tar.gz
-tar xvf  bcm2835-1.51.tar.gz
+if [ ! -d bcm2835-1.51 ]; then
+    if [ ! -f bcm2835-1.51.tar.gz ]; then
+        curl -L http://www.airspayce.com/mikem/bcm2835/bcm2835-1.51.tar.gz -o bcm2835-1.51.tar.gz
+    fi
+    tar xvf  bcm2835-1.51.tar.gz
+fi
 cd bcm2835-1.51
 ./configure
 make

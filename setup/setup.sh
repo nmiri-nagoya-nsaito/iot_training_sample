@@ -121,10 +121,10 @@ sudo make check
 sudo make install
 
 ### install node-dht-sensor
-sudo npm install -g node-dht-sensor
+sudo npm install -g --unsafe-perm node-dht-sensor
 
 ### install node-red-contrib-dht-sensor
-sudo npm install -g node-red-contrib-dht-sensor
+sudo npm install -g --unsafe-perm node-red-contrib-dht-sensor
 
 ### install node-red-contrib-ui
 sudo npm install -g node-red-contrib-ui
